@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 900;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
+@layer base {
+  :root {
+    --font-display: "Fraunces", serif;
+    --font-body: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --radius: 0.875rem;
+
+    /* Ceylon Estate Registry — public site, warm beige light mode */
+    --background: 0.891 0.022 81.3; /* rich beige #E8DDCC */
+    --foreground: 0.247 0 0; /* dark #1F1F1F */
+    --card: 1 0 0; /* white #FFFFFF */
+    --card-foreground: 0.247 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.247 0 0;
+
+    /* Green #2E7D32 — CTAs, brand, links */
+    --primary: 0.5163 0.1307 145.5;
+    --primary-foreground: 0.985 0.006 145.5;
+
+    /* Beige-tinted secondary surfaces */
+    --secondary: 0.945 0.016 81.3;
+    --secondary-foreground: 0.32 0.02 81.3;
+    --muted: 0.938 0.014 81.3;
+    --muted-foreground: 0.52 0.022 78;
+
+    /* Light brown #B08968 — accent / secondary */
+    --accent: 0.635 0.0517 60.5;
+    --accent-foreground: 0.99 0.008 60.5;
+
+    --success: 0.5163 0.1307 145.5;
+    --success-foreground: 0.985 0.006 145.5;
+    --warning: 0.7 0.12 70;
+    --warning-foreground: 0.26 0.04 70;
+    --destructive: 0.53 0.185 28;
+    --destructive-foreground: 0.985 0.008 28;
+
+    --border: 0.855 0.02 81.3;
+    --input: 0.855 0.02 81.3;
+    --ring: 0.5163 0.1307 145.5;
+
+    --chart-1: 0.5163 0.1307 145.5;
+    --chart-2: 0.635 0.0517 60.5;
+    --chart-3: 0.7 0.12 70;
+    --chart-4: 0.62 0.09 215;
+    --chart-5: 0.53 0.185 28;
+
+    /* Admin console — deliberately separate identity: neutral, dense, cool */
+    --sidebar: 0.215 0.008 250;
+    --sidebar-foreground: 0.94 0.006 250;
+    --sidebar-primary: 0.66 0.09 250;
+    --sidebar-primary-foreground: 0.16 0.01 250;
+    --sidebar-accent: 0.29 0.01 250;
+    --sidebar-accent-foreground: 0.95 0.006 250;
+    --sidebar-border: 0.31 0.01 250;
+    --sidebar-ring: 0.66 0.09 250;
+
+    /* Admin surface tokens (used by console shell) */
+    --admin-surface: 0.985 0.003 250;
+    --admin-surface-foreground: 0.22 0.01 250;
+    --admin-border: 0.9 0.006 250;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.5163 0.1307 145.5),
+      oklch(0.44 0.115 150)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.7 0.055 60.5),
+      oklch(0.6 0.06 55)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.891 0.022 81.3),
+      oklch(0.925 0.017 81.3)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.185 0.012 81.3;
+    --foreground: 0.94 0.008 81.3;
+    --card: 0.23 0.014 81.3;
+    --card-foreground: 0.94 0.008 81.3;
+    --popover: 0.25 0.016 81.3;
+    --popover-foreground: 0.94 0.008 81.3;
+
+    --primary: 0.68 0.13 145.5;
+    --primary-foreground: 0.17 0.02 145.5;
+
+    --secondary: 0.26 0.014 81.3;
+    --secondary-foreground: 0.88 0.01 81.3;
+    --muted: 0.26 0.014 81.3;
+    --muted-foreground: 0.64 0.018 81.3;
+
+    --accent: 0.72 0.055 60.5;
+    --accent-foreground: 0.2 0.02 60.5;
+
+    --success: 0.68 0.13 145.5;
+    --success-foreground: 0.17 0.02 145.5;
+    --warning: 0.76 0.12 70;
+    --warning-foreground: 0.2 0.03 70;
+    --destructive: 0.62 0.17 28;
+    --destructive-foreground: 0.16 0.02 28;
+
+    --border: 0.31 0.014 81.3;
+    --input: 0.31 0.014 81.3;
+    --ring: 0.68 0.13 145.5;
+
+    --chart-1: 0.68 0.13 145.5;
+    --chart-2: 0.72 0.055 60.5;
+    --chart-3: 0.76 0.12 70;
+    --chart-4: 0.7 0.09 215;
+    --chart-5: 0.62 0.17 28;
+
+    --sidebar: 0.175 0.008 250;
+    --sidebar-foreground: 0.93 0.006 250;
+    --sidebar-primary: 0.68 0.09 250;
+    --sidebar-primary-foreground: 0.16 0.01 250;
+    --sidebar-accent: 0.25 0.01 250;
+    --sidebar-accent-foreground: 0.9 0.006 250;
+    --sidebar-border: 0.29 0.01 250;
+    --sidebar-ring: 0.68 0.09 250;
+
+    --admin-surface: 0.185 0.006 250;
+    --admin-surface-foreground: 0.92 0.006 250;
+    --admin-border: 0.3 0.008 250;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.68 0.13 145.5),
+      oklch(0.56 0.11 150)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.72 0.055 60.5),
+      oklch(0.62 0.06 55)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.185 0.012 81.3),
+      oklch(0.21 0.014 81.3)
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    font-size: 17px;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    font-optical-sizing: auto;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+  h4,
+  h5,
+  h6 {
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-warm {
+    background-image: var(--gradient-warm);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shadow-subtle {
+    box-shadow: 0 1px 2px 0 oklch(0.247 0 0 / 0.05), 0 1px 3px 0
+      oklch(0.247 0 0 / 0.04);
+  }
+  .shadow-elevated {
+    box-shadow: 0 4px 6px -1px oklch(0.247 0 0 / 0.07), 0 12px 26px -8px
+      oklch(0.247 0 0 / 0.12);
+  }
+  .shadow-float {
+    box-shadow: 0 14px 36px -10px oklch(0.247 0 0 / 0.16), 0 4px 10px -4px
+      oklch(0.247 0 0 / 0.08);
+  }
+
+  .admin-surface {
+    background-color: oklch(var(--admin-surface));
+    color: oklch(var(--admin-surface-foreground));
+  }
+  .admin-border {
+    border-color: oklch(var(--admin-border));
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}

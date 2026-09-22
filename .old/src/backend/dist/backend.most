@@ -1,0 +1,461 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type BannerId__44969027 = Nat;
+type Banner__777870614 =
+  {
+    createdAt : Timestamp__301639476;
+    enabled : Bool;
+    id : BannerId__44969027;
+    image : ?Photo__873575415;
+    linkUrl : Text;
+    sortOrder : Nat;
+    subtitle : Text;
+    title : Text;
+    updatedAt : Timestamp__301639476
+  };
+type CategoryId__14729845 = Nat;
+type Category__457257140 =
+  {
+    description : Text;
+    enabled : Bool;
+    id : CategoryId__14729845;
+    name : Text;
+    slug : Text;
+    sortOrder : Nat
+  };
+type ChatbotEntryId__874563482 = Nat;
+type ChatbotEntry__366959745 =
+  {
+    answer : Text;
+    enabled : Bool;
+    id : ChatbotEntryId__874563482;
+    keywords : [Text];
+    question : Text;
+    sortOrder : Nat;
+    updatedAt : Timestamp__301639476
+  };
+type CustomerId__1015005394 = Principal;
+type Customer__225412617 =
+  {
+    address : Text;
+    blocked : Bool;
+    company : Text;
+    createdAt : Timestamp__301639476;
+    email : Text;
+    emailVerification : EmailVerification__571624645;
+    mobileVerification : MobileVerification__89776085;
+    name : Text;
+    phone : Text;
+    principal : CustomerId__1015005394;
+    updatedAt : Timestamp__301639476;
+    whatsapp : Text
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type EmailVerification__571624645 = {#pending; #unverified; #verified};
+type EnquiryId__100513705 = Nat;
+type Enquiry__870898193 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    id : EnquiryId__100513705;
+    listingId : ListingId__58075594;
+    message : Text;
+    name : Text;
+    phone : Text;
+    read : Bool
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type ListingId__58075594 = Nat;
+type ListingType__827828483 = {#rent; #sale};
+type Listing__378201713 =
+  {
+    addressLine : Text;
+    area : Nat;
+    bathrooms : Nat;
+    bedrooms : Nat;
+    blocked : Bool;
+    city : Text;
+    country : Text;
+    createdAt : Timestamp__301639476;
+    currency : Text;
+    description : Text;
+    featured : Bool;
+    id : ListingId__58075594;
+    listingType : ListingType__827828483;
+    owner : ?CustomerId__1015005394;
+    photos : [Photo__873575415];
+    postcode : Text;
+    price : Nat;
+    propertyType : PropertyType__977413445;
+    published : Bool;
+    region : Text;
+    title : Text;
+    updatedAt : Timestamp__301639476
+  };
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MobileVerification__89776085 =
+  {#approved; #notSubmitted; #pendingReview; #rejected};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__233092896 =
+  {
+    accessControlState : AccessControlState__201339279;
+    enquiries :
+      Map__230067015<Nat,
+                      {
+                        createdAt : Int;
+                        email : Text;
+                        id : Nat;
+                        listingId : Nat;
+                        message : Text;
+                        name : Text;
+                        phone : Text;
+                        read : Bool
+                      }>;
+    listings :
+      Map__230067015<Nat,
+                      {
+                        addressLine : Text;
+                        area : Nat;
+                        bathrooms : Nat;
+                        bedrooms : Nat;
+                        city : Text;
+                        country : Text;
+                        createdAt : Int;
+                        currency : Text;
+                        description : Text;
+                        id : Nat;
+                        listingType : {#rent; #sale};
+                        photos : [{blob : Blob; filename : Text}];
+                        postcode : Text;
+                        price : Nat;
+                        propertyType :
+                          {
+                            #apartment;
+                            #commercial;
+                            #condo;
+                            #house;
+                            #land;
+                            #other;
+                            #townhouse
+                          };
+                        published : Bool;
+                        region : Text;
+                        title : Text;
+                        updatedAt : Int
+                      }>;
+    listingsState : {var nextEnquiryId : Nat; var nextListingId : Nat}
+  };
+type NewActor__657500352 =
+  {
+    accessControlState : AccessControlState__201339279;
+    banners :
+      Map__230067015<Nat,
+                      {
+                        createdAt : Int;
+                        enabled : Bool;
+                        id : Nat;
+                        image : ?{blob : Blob; filename : Text};
+                        linkUrl : Text;
+                        sortOrder : Nat;
+                        subtitle : Text;
+                        title : Text;
+                        updatedAt : Int
+                      }>;
+    categories :
+      Map__230067015<Nat,
+                      {
+                        description : Text;
+                        enabled : Bool;
+                        id : Nat;
+                        name : Text;
+                        slug : Text;
+                        sortOrder : Nat
+                      }>;
+    chatbotEntries :
+      Map__230067015<Nat,
+                      {
+                        answer : Text;
+                        enabled : Bool;
+                        id : Nat;
+                        keywords : [Text];
+                        question : Text;
+                        sortOrder : Nat;
+                        updatedAt : Int
+                      }>;
+    contentState :
+      {
+        var nextBannerId : Nat;
+        var nextCategoryId : Nat;
+        var nextChatbotEntryId : Nat
+      };
+    customers :
+      Map__230067015<Principal,
+                      {
+                        address : Text;
+                        blocked : Bool;
+                        company : Text;
+                        createdAt : Int;
+                        email : Text;
+                        emailVerification :
+                          {#pending; #unverified; #verified};
+                        mobileVerification :
+                          {
+                            #approved;
+                            #notSubmitted;
+                            #pendingReview;
+                            #rejected
+                          };
+                        name : Text;
+                        phone : Text;
+                        principal : Principal;
+                        updatedAt : Int;
+                        whatsapp : Text
+                      }>;
+    customersState : {var nextPaymentId : Nat; var nextPlanId : Nat};
+    enquiries :
+      Map__230067015<Nat,
+                      {
+                        createdAt : Int;
+                        email : Text;
+                        id : Nat;
+                        listingId : Nat;
+                        message : Text;
+                        name : Text;
+                        phone : Text;
+                        read : Bool
+                      }>;
+    listings : Map__230067015<Nat, NewListing__500063573>;
+    listingsState : {var nextEnquiryId : Nat; var nextListingId : Nat};
+    payments :
+      Map__230067015<Nat,
+                      {
+                        amount : Nat;
+                        customer : Principal;
+                        id : Nat;
+                        periodEnd : ?Int;
+                        periodStart : ?Int;
+                        planId : Nat;
+                        planName : Text;
+                        reference : Text;
+                        reviewedAt : ?Int;
+                        status : {#confirmed; #pending; #rejected};
+                        submittedAt : Int
+                      }>;
+    plans :
+      Map__230067015<Nat,
+                      {
+                        active : Bool;
+                        billingPeriod : Text;
+                        features : [Text];
+                        id : Nat;
+                        imageAllowance : ?Nat;
+                        listingAllowance : ?Nat;
+                        name : Text;
+                        price : Nat;
+                        sortOrder : Nat
+                      }>;
+    subscriptions :
+      Map__230067015<Principal,
+                      {
+                        billingPeriod : Text;
+                        expiresAt : Int;
+                        planId : Nat;
+                        planName : Text;
+                        price : Nat;
+                        renewedAt : ?Int;
+                        startedAt : Int;
+                        status : {#active; #expired}
+                      }>
+  };
+type NewListing__500063573 =
+  {
+    addressLine : Text;
+    area : Nat;
+    bathrooms : Nat;
+    bedrooms : Nat;
+    blocked : Bool;
+    city : Text;
+    country : Text;
+    createdAt : Int;
+    currency : Text;
+    description : Text;
+    featured : Bool;
+    id : Nat;
+    listingType : {#rent; #sale};
+    owner : ?Principal;
+    photos : [{blob : Blob; filename : Text}];
+    postcode : Text;
+    price : Nat;
+    propertyType :
+      {#apartment; #commercial; #condo; #house; #land; #other; #townhouse};
+    published : Bool;
+    region : Text;
+    title : Text;
+    updatedAt : Int
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__1027974992 = {};
+type OldActor__1035117249 =
+  {
+    accessControlState : AccessControlState__201339279;
+    enquiries :
+      Map__230067015<Nat,
+                      {
+                        createdAt : Int;
+                        email : Text;
+                        id : Nat;
+                        listingId : Nat;
+                        message : Text;
+                        name : Text;
+                        phone : Text;
+                        read : Bool
+                      }>;
+    listings : Map__230067015<Nat, OldListing__498973863>;
+    listingsState : {var nextEnquiryId : Nat; var nextListingId : Nat}
+  };
+type OldListing__498973863 =
+  {
+    addressLine : Text;
+    area : Nat;
+    bathrooms : Nat;
+    bedrooms : Nat;
+    city : Text;
+    country : Text;
+    createdAt : Int;
+    currency : Text;
+    description : Text;
+    id : Nat;
+    listingType : {#rent; #sale};
+    photos : [{blob : Blob; filename : Text}];
+    postcode : Text;
+    price : Nat;
+    propertyType :
+      {#apartment; #commercial; #condo; #house; #land; #other; #townhouse};
+    published : Bool;
+    region : Text;
+    title : Text;
+    updatedAt : Int
+  };
+type PaymentId__1028686908 = Nat;
+type PaymentStatus__488265551 = {#confirmed; #pending; #rejected};
+type Payment__697179640 =
+  {
+    amount : Nat;
+    customer : CustomerId__1015005394;
+    id : PaymentId__1028686908;
+    periodEnd : ?Timestamp__301639476;
+    periodStart : ?Timestamp__301639476;
+    planId : PlanId__999688320;
+    planName : Text;
+    reference : Text;
+    reviewedAt : ?Timestamp__301639476;
+    status : PaymentStatus__488265551;
+    submittedAt : Timestamp__301639476
+  };
+type Photo__873575415 = {blob : Blob; filename : Text};
+type PlanId__999688320 = Nat;
+type Plan__596580088 =
+  {
+    active : Bool;
+    billingPeriod : Text;
+    features : [Text];
+    id : PlanId__999688320;
+    imageAllowance : ?Nat;
+    listingAllowance : ?Nat;
+    name : Text;
+    price : Nat;
+    sortOrder : Nat
+  };
+type PropertyType__977413445 =
+  {#apartment; #commercial; #condo; #house; #land; #other; #townhouse};
+type SubscriptionStatus__111067369 = {#active; #expired};
+type Subscription__482491432 =
+  {
+    billingPeriod : Text;
+    expiresAt : Timestamp__301639476;
+    planId : PlanId__999688320;
+    planName : Text;
+    price : Nat;
+    renewedAt : ?Timestamp__301639476;
+    startedAt : Timestamp__301639476;
+    status : SubscriptionStatus__111067369
+  };
+type Timestamp__301639476 = Int;
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20260922_032228" : (old : OldActor__1027974992) -> NewActor__233092896;
+  "20260922_120000" : (old : OldActor__1035117249) -> NewActor__657500352
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable banners :
+    {
+      var root : Node__204828119<BannerId__44969027, Banner__777870614>;
+      var size : Nat__227979830
+    };
+  stable categories :
+    {
+      var root : Node__204828119<CategoryId__14729845, Category__457257140>;
+      var size : Nat__227979830
+    };
+  stable chatbotEntries :
+    {
+      var root :
+        Node__204828119<ChatbotEntryId__874563482, ChatbotEntry__366959745>;
+      var size : Nat__227979830
+    };
+  stable contentState :
+    {
+      var nextBannerId : Nat;
+      var nextCategoryId : Nat;
+      var nextChatbotEntryId : Nat
+    };
+  stable customers :
+    {
+      var root : Node__204828119<CustomerId__1015005394, Customer__225412617>;
+      var size : Nat__227979830
+    };
+  stable customersState : {var nextPaymentId : Nat; var nextPlanId : Nat};
+  stable enquiries :
+    {
+      var root : Node__204828119<EnquiryId__100513705, Enquiry__870898193>;
+      var size : Nat__227979830
+    };
+  stable listings :
+    {
+      var root : Node__204828119<ListingId__58075594, Listing__378201713>;
+      var size : Nat__227979830
+    };
+  stable listingsState : {var nextEnquiryId : Nat; var nextListingId : Nat};
+  stable payments :
+    {
+      var root : Node__204828119<PaymentId__1028686908, Payment__697179640>;
+      var size : Nat__227979830
+    };
+  stable plans :
+    {
+      var root : Node__204828119<PlanId__999688320, Plan__596580088>;
+      var size : Nat__227979830
+    };
+  stable subscriptions :
+    {
+      var root :
+        Node__204828119<CustomerId__1015005394, Subscription__482491432>;
+      var size : Nat__227979830
+    }
+};

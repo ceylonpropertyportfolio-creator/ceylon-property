@@ -1,0 +1,20 @@
+{
+  "overview": "A premium Sri Lankan real-estate advertising platform where customers subscribe to a monthly plan and post property listings for buyers and renters to browse.",
+  "features": [
+    "Browse and search property listings by category, location, price and bedrooms",
+    "Post your own property adverts with photos, contact details and WhatsApp",
+    "Four monthly advertising plans with automatic listing and image limits",
+    "Customer account with subscription details, payment history and My Listings",
+    "Admin console to approve listings, manage customers, plans, payments and banners",
+    "Rotating home page banner slider and a built-in help chatbot"
+  ],
+  "category": "real-estate",
+  "tags": [
+    "real-estate",
+    "property-listings",
+    "subscriptions",
+    "advertising",
+    "sri-lanka"
+  ],
+  "last_updated": "2026-09-22T06:15:06.414Z"
+}

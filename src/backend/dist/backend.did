@@ -1,0 +1,621 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type SubscriptionStatus = 
+ variant {
+   active;
+   expired;
+ };
+type Subscription = 
+ record {
+   billingPeriod: text;
+   expiresAt: Timestamp;
+   planId: PlanId;
+   planName: text;
+   price: nat;
+   renewedAt: opt Timestamp;
+   startedAt: Timestamp;
+   status: SubscriptionStatus;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_9 = 
+ variant {
+   err: ContentError;
+   ok: Banner;
+ };
+type Result_8 = 
+ variant {
+   err: ContentError;
+   ok: Category;
+ };
+type Result_7 = 
+ variant {
+   err: ContentError;
+   ok: ChatbotEntry;
+ };
+type Result_6 = 
+ variant {
+   err: PaymentError;
+   ok: Plan;
+ };
+type Result_5 = 
+ variant {
+   err: ListingError;
+   ok;
+ };
+type Result_4 = 
+ variant {
+   err: CustomerError;
+   ok;
+ };
+type Result_3 = 
+ variant {
+   err: EnquiryError;
+   ok: Enquiry;
+ };
+type Result_2 = 
+ variant {
+   err: PaymentError;
+   ok: Payment;
+ };
+type Result_13 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result_12 = 
+ variant {
+   err: ContentError;
+   ok;
+ };
+type Result_11 = 
+ variant {
+   err: PaymentError;
+   ok;
+ };
+type Result_10 = 
+ variant {
+   err: EnquiryAdminError;
+   ok: Enquiry;
+ };
+type Result_1 = 
+ variant {
+   err: ListingError;
+   ok: Listing;
+ };
+type Result = 
+ variant {
+   err: CustomerError;
+   ok: Customer;
+ };
+type PropertyType = 
+ variant {
+   apartment;
+   commercial;
+   condo;
+   house;
+   land;
+   other;
+   townhouse;
+ };
+type PlanInput = 
+ record {
+   active: bool;
+   billingPeriod: text;
+   features: vec text;
+   imageAllowance: opt nat;
+   listingAllowance: opt nat;
+   name: text;
+   price: nat;
+   sortOrder: nat;
+ };
+type PlanId = nat;
+type Plan = 
+ record {
+   active: bool;
+   billingPeriod: text;
+   features: vec text;
+   id: PlanId;
+   imageAllowance: opt nat;
+   listingAllowance: opt nat;
+   name: text;
+   price: nat;
+   sortOrder: nat;
+ };
+type Photo = 
+ record {
+   "blob": blob;
+   filename: text;
+ };
+type PaymentStatus = 
+ variant {
+   confirmed;
+   pending;
+   rejected;
+ };
+type PaymentId = nat;
+type PaymentError = 
+ variant {
+   imageLimitReached: nat;
+   listingLimitReached: nat;
+   noActiveSubscription;
+   notAuthorized;
+   notRegistered;
+   paymentNotFound: PaymentId;
+   planNotFound: PlanId;
+ };
+type Payment = 
+ record {
+   amount: nat;
+   customer: CustomerId;
+   id: PaymentId;
+   periodEnd: opt Timestamp;
+   periodStart: opt Timestamp;
+   planId: PlanId;
+   planName: text;
+   reference: text;
+   reviewedAt: opt Timestamp;
+   status: PaymentStatus;
+   submittedAt: Timestamp;
+ };
+type MobileVerification = 
+ variant {
+   approved;
+   notSubmitted;
+   pendingReview;
+   rejected;
+ };
+type ListingUpdate = 
+ record {
+   addressLine: opt text;
+   area: opt nat;
+   bathrooms: opt nat;
+   bedrooms: opt nat;
+   city: opt text;
+   country: opt text;
+   currency: opt text;
+   description: opt text;
+   listingType: opt ListingType;
+   photos: opt vec Photo;
+   postcode: opt text;
+   price: opt nat;
+   propertyType: opt PropertyType;
+   region: opt text;
+   title: opt text;
+ };
+type ListingType = 
+ variant {
+   rent;
+   sale;
+ };
+type ListingInput = 
+ record {
+   addressLine: text;
+   area: nat;
+   bathrooms: nat;
+   bedrooms: nat;
+   city: text;
+   country: text;
+   currency: text;
+   description: text;
+   listingType: ListingType;
+   photos: vec Photo;
+   postcode: text;
+   price: nat;
+   propertyType: PropertyType;
+   region: text;
+   title: text;
+ };
+type ListingId = nat;
+type ListingFilter = 
+ record {
+   keyword: opt text;
+   listingType: opt ListingType;
+   location: opt text;
+   maxPrice: opt nat;
+   minBedrooms: opt nat;
+   minPrice: opt nat;
+   propertyType: opt PropertyType;
+ };
+type ListingError = 
+ variant {
+   imageLimitReached: nat;
+   listingLimitReached: nat;
+   noActiveSubscription;
+   notAuthorized;
+   notFound: ListingId;
+ };
+type Listing = 
+ record {
+   addressLine: text;
+   area: nat;
+   bathrooms: nat;
+   bedrooms: nat;
+   blocked: bool;
+   city: text;
+   country: text;
+   createdAt: Timestamp;
+   currency: text;
+   description: text;
+   featured: bool;
+   id: ListingId;
+   listingType: ListingType;
+   owner: opt CustomerId;
+   photos: vec Photo;
+   postcode: text;
+   price: nat;
+   propertyType: PropertyType;
+   published: bool;
+   region: text;
+   title: text;
+   updatedAt: Timestamp;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type EnquiryInput = 
+ record {
+   email: text;
+   listingId: ListingId;
+   message: text;
+   name: text;
+   phone: text;
+ };
+type EnquiryId = nat;
+type EnquiryError = 
+ variant {
+   listingNotFound: ListingId;
+   listingNotPublished: ListingId;
+ };
+type EnquiryAdminError = 
+ variant {
+   notAuthorized;
+   notFound: EnquiryId;
+ };
+type Enquiry = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: EnquiryId;
+   listingId: ListingId;
+   message: text;
+   name: text;
+   phone: text;
+   read: bool;
+ };
+type EmailVerification = 
+ variant {
+   pending;
+   unverified;
+   verified;
+ };
+type CustomerProfileInput = 
+ record {
+   address: text;
+   company: text;
+   email: text;
+   name: text;
+   phone: text;
+   whatsapp: text;
+ };
+type CustomerId = principal;
+type CustomerError = 
+ variant {
+   alreadyRegistered;
+   invalidCode;
+   notAuthorized;
+   notFound: CustomerId;
+   notRegistered;
+ };
+type CustomerAccount = 
+ record {
+   customer: Customer;
+   subscription: opt Subscription;
+ };
+type Customer = 
+ record {
+   address: text;
+   blocked: bool;
+   company: text;
+   createdAt: Timestamp;
+   email: text;
+   emailVerification: EmailVerification;
+   mobileVerification: MobileVerification;
+   name: text;
+   phone: text;
+   "principal": CustomerId;
+   updatedAt: Timestamp;
+   whatsapp: text;
+ };
+type ContentError = 
+ variant {
+   bannerLimitReached: nat;
+   notAuthorized;
+   notFound: nat;
+ };
+type ChatbotEntryInput = 
+ record {
+   answer: text;
+   enabled: bool;
+   keywords: vec text;
+   question: text;
+   sortOrder: nat;
+ };
+type ChatbotEntryId = nat;
+type ChatbotEntry = 
+ record {
+   answer: text;
+   enabled: bool;
+   id: ChatbotEntryId;
+   keywords: vec text;
+   question: text;
+   sortOrder: nat;
+   updatedAt: Timestamp;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CategoryInput = 
+ record {
+   description: text;
+   enabled: bool;
+   name: text;
+   slug: text;
+   sortOrder: nat;
+ };
+type CategoryId = nat;
+type Category = 
+ record {
+   description: text;
+   enabled: bool;
+   id: CategoryId;
+   name: text;
+   slug: text;
+   sortOrder: nat;
+ };
+type BannerInput = 
+ record {
+   enabled: bool;
+   image: opt Photo;
+   linkUrl: text;
+   sortOrder: nat;
+   subtitle: text;
+   title: text;
+ };
+type BannerId = nat;
+type Banner = 
+ record {
+   createdAt: Timestamp;
+   enabled: bool;
+   id: BannerId;
+   image: opt Photo;
+   linkUrl: text;
+   sortOrder: nat;
+   subtitle: text;
+   title: text;
+   updatedAt: Timestamp;
+ };
+type AdminPayment = 
+ record {
+   customerEmail: text;
+   customerName: text;
+   payment: Payment;
+ };
+type AdminListingSummary = 
+ record {
+   enquiryCount: nat;
+   listing: Listing;
+ };
+type AdminEnquiry = 
+ record {
+   enquiry: Enquiry;
+   listingTitle: text;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result_13);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Appends photos to one of the calling customer's own listings, enforcing
+  /// the plan's image allowance.
+  addMyListingPhotos: (id: ListingId, photos: vec Photo) -> (Result_1);
+  /// Appends uploaded photos to a listing. Admin only.
+  adminAddListingPhotos: (id: ListingId, photos: vec Photo) -> (Result_1);
+  /// Confirms a submitted payment and activates or renews the subscription.
+  /// Admin only.
+  adminConfirmPayment: (id: PaymentId) -> (Result_2);
+  /// Creates a banner. Admin only.
+  adminCreateBanner: (input: BannerInput) -> (Result_9);
+  /// Creates a category. Admin only.
+  adminCreateCategory: (input: CategoryInput) -> (Result_8);
+  /// Creates a chatbot entry. Admin only.
+  adminCreateChatbotEntry: (input: ChatbotEntryInput) -> (Result_7);
+  /// Creates a listing. Admin only.
+  adminCreateListing: (input: ListingInput) -> (Result_1);
+  /// Creates a plan. Admin only.
+  adminCreatePlan: (input: PlanInput) -> (Result_6);
+  /// Deletes a banner. Admin only.
+  adminDeleteBanner: (id: BannerId) -> (Result_12);
+  /// Deletes a category. Admin only.
+  adminDeleteCategory: (id: CategoryId) -> (Result_12);
+  /// Deletes a chatbot entry. Admin only.
+  adminDeleteChatbotEntry: (id: ChatbotEntryId) -> (Result_12);
+  /// Deletes an enquiry. Admin only.
+  adminDeleteEnquiry: (id: EnquiryId) -> (Result_5);
+  /// Deletes a listing and its enquiries. Admin only.
+  adminDeleteListing: (id: ListingId) -> (Result_5);
+  /// Deletes a plan. Admin only.
+  adminDeletePlan: (id: PlanId) -> (Result_11);
+  /// Returns a single listing regardless of published state. Admin only.
+  adminGetListing: (id: ListingId) -> (opt Listing) query;
+  /// Returns a customer's subscription. Admin only.
+  adminGetSubscription: (customer: CustomerId) -> (opt Subscription) query;
+  /// Returns every banner, enabled or not. Admin only.
+  adminListBanners: () -> (vec Banner) query;
+  /// Returns every category, enabled or not. Admin only.
+  adminListCategories: () -> (vec Category) query;
+  /// Returns every chatbot entry, enabled or not. Admin only.
+  adminListChatbotEntries: () -> (vec ChatbotEntry) query;
+  /// Returns every customer account. Admin only.
+  adminListCustomers: () -> (vec CustomerAccount) query;
+  /// Returns every enquiry, newest first, each with its listing title. Admin only.
+  adminListEnquiries: () -> (vec AdminEnquiry) query;
+  /// Returns every listing with its enquiry count, newest first. Admin only.
+  adminListListings: () -> (vec AdminListingSummary) query;
+  /// Returns every payment with its customer's details. Admin only.
+  adminListPayments: () -> (vec AdminPayment) query;
+  /// Returns every plan, active or not. Admin only.
+  adminListPlans: () -> (vec Plan) query;
+  /// Rejects a submitted payment. Admin only.
+  adminRejectPayment: (id: PaymentId) -> (Result_2);
+  /// Removes the photo at `index` from a listing. Admin only.
+  adminRemoveListingPhoto: (id: ListingId, index: nat) -> (Result_1);
+  /// Moves a banner to a new slider position. Admin only.
+  adminReorderBanner: (id: BannerId, sortOrder: nat) -> (Result_9);
+  /// Enables or disables a banner. Admin only.
+  adminSetBannerEnabled: (id: BannerId, enabled: bool) -> (Result_9);
+  /// Blocks or unblocks a customer account. Admin only.
+  adminSetCustomerBlocked: (customer: CustomerId, blocked: bool) -> (Result);
+  /// Sets the read flag on an enquiry. Admin only.
+  adminSetEnquiryRead: (id: EnquiryId, read: bool) -> (Result_10);
+  /// Blocks or unblocks a listing. Admin only.
+  adminSetListingBlocked: (id: ListingId, blocked: bool) -> (Result_1);
+  /// Features or unfeatures a listing. Admin only.
+  adminSetListingFeatured: (id: ListingId, featured: bool) -> (Result_1);
+  /// Publishes or unpublishes a listing. Admin only.
+  adminSetListingPublished: (id: ListingId, published: bool) -> (Result_1);
+  /// Approves or rejects a customer's submitted mobile number. Admin only.
+  adminSetMobileVerification: (customer: CustomerId, state:
+   MobileVerification) -> (Result);
+  /// Applies a full edit to a banner. Admin only.
+  adminUpdateBanner: (id: BannerId, input: BannerInput) -> (Result_9);
+  /// Applies a full edit to a category. Admin only.
+  adminUpdateCategory: (id: CategoryId, input: CategoryInput) -> (Result_8);
+  /// Applies a full edit to a chatbot entry. Admin only.
+  adminUpdateChatbotEntry: (id: ChatbotEntryId, input: ChatbotEntryInput) ->
+   (Result_7);
+  /// Applies a partial update to a listing. Admin only.
+  adminUpdateListing: (id: ListingId, patch: ListingUpdate) -> (Result_1);
+  /// Applies a full edit to a plan. Admin only.
+  adminUpdatePlan: (id: PlanId, input: PlanInput) -> (Result_6);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Confirms the email verification code.
+  confirmEmailVerification: (code: text) -> (Result);
+  /// Creates a listing owned by the calling customer. Requires an active
+  /// subscription and enforces the plan's listing and image allowances.
+  createMyListing: (input: ListingInput) -> (Result_1);
+  /// Deletes one of the calling customer's own listings.
+  deleteMyListing: (id: ListingId) -> (Result_5);
+  execute: (qJson: text) -> (Result__1) query;
+  /// Returns the backend API reference as Markdown.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// Returns a single published listing, or `null` when it does not exist or is
+  /// not published.
+  getListing: (id: ListingId) -> (opt Listing) query;
+  /// Returns the calling customer's account with its subscription summary.
+  getMyAccount: () -> (opt CustomerAccount) query;
+  /// Returns one of the calling customer's own listings, or `null`.
+  getMyListing: (id: ListingId) -> (opt Listing) query;
+  /// Returns the calling customer's own listings, newest first.
+  getMyListings: () -> (vec Listing) query;
+  /// Returns the calling customer's payment history, newest first.
+  getMyPayments: () -> (vec Payment) query;
+  /// Returns the calling customer's subscription, or `null` when none exists.
+  getMySubscription: () -> (opt Subscription) query;
+  /// Returns a single plan, or `null` when it does not exist.
+  getPlan: (id: PlanId) -> (opt Plan) query;
+  isCallerAdmin: () -> (bool) query;
+  /// Returns the enabled homepage banners ordered by `sortOrder`.
+  listBanners: () -> (vec Banner) query;
+  /// Returns the enabled advertising categories ordered by `sortOrder`.
+  listCategories: () -> (vec Category) query;
+  /// Returns the enabled help chatbot entries ordered by `sortOrder`.
+  listChatbotEntries: () -> (vec ChatbotEntry) query;
+  /// Returns the featured published listings, newest first.
+  listFeaturedListings: () -> (vec Listing) query;
+  /// Returns every active plan ordered by `sortOrder`.
+  listPlans: () -> (vec Plan) query;
+  /// Returns every published listing, newest first.
+  listPublishedListings: () -> (vec Listing) query;
+  /// Registers the calling principal as a customer.
+  registerCustomer: (input: CustomerProfileInput) -> (Result);
+  /// Removes the photo at `index` from one of the calling customer's own
+  /// listings.
+  removeMyListingPhoto: (id: ListingId, index: nat) -> (Result_1);
+  /// Requests an email verification code for the supplied address.
+  requestEmailVerification: (email: text) -> (Result_4);
+  schema: () -> (text) query;
+  /// Returns published listings matching the supplied filters, newest first.
+  searchListings: (filter: ListingFilter) -> (vec Listing) query;
+  /// Submits an enquiry against a published listing.
+  submitEnquiry: (input: EnquiryInput) -> (Result_3);
+  /// Records a mobile number for admin review. No SMS provider is configured.
+  submitMobileNumber: (phone: text) -> (Result);
+  /// Submits a payment reference for a plan. The payment stays pending until an
+  /// admin confirms it.
+  submitPayment: (planId: PlanId, reference: text) -> (Result_2);
+  /// Applies a partial update to one of the calling customer's own listings.
+  updateMyListing: (id: ListingId, patch: ListingUpdate) -> (Result_1);
+  /// Updates the calling customer's profile.
+  updateMyProfile: (input: CustomerProfileInput) -> (Result);
+}
